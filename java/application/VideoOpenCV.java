@@ -35,7 +35,6 @@ public class VideoOpenCV {
      System.exit(0);
     }
 
-
     public static void openCam(){
         JFrame window = new JFrame("Просмотр видео");
         window.setSize(1000,600);
