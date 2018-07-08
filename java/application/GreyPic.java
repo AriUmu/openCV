@@ -5,8 +5,8 @@ import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Scalar;
 import org.opencv.imgcodecs.Imgcodecs;
-import org.opencv.imgproc.Imgproc;
 
+import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.*;
@@ -21,19 +21,17 @@ public class GreyPic {
     }
 
     public static void main(String[] args) {
-        Mat m = new Mat(1, 1, CvType.CV_8UC3, new Scalar(0, 128, 255));
-        System.out.println(m.dump());
-
-        Mat m2 = new Mat();
-        Imgproc.cvtColor(m, m2, Imgproc.COLOR_BGR2GRAY);
-        System.out.println(m2.dump());
 
         Mat img = Imgcodecs.imread("/Users/arina/Desktop/1.jpg");
 
-        if (img.empty()) {
-            System.out.println("Img is empty");
-        } else {
-            System.out.println(img.dump());
+//        BufferedImage image = MapToBufferedImage(img);
+//        Mat mat = BufferedImgeToMat(image);
+        if(img.empty()){
+            System.out.println("Не удалось загрузить изображение");
+            return;
+        }
+        else {
+            showImage(img, "Изображение");
         }
     }
 
@@ -141,6 +139,30 @@ public class GreyPic {
             return false;
         }
         return true;
+    }
+
+    public static void showImage(Mat img, String title){
+        BufferedImage im = MapToBufferedImage(img);
+        if (im == null){
+            return;
+        }
+        int w = 1000;
+        int h = 600;
+        JFrame window = new JFrame(title);
+        window.setSize(w,h);
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        ImageIcon imageIcon = new ImageIcon(im);
+        JLabel label = new JLabel(imageIcon);
+
+        JScrollPane pane = new JScrollPane(label);
+        window.setContentPane(pane);
+
+        if(im.getWidth() < w && im.getHeight() < h){
+            window.pack();
+        }
+        window.setLocationRelativeTo(null);
+        window.setVisible(true);
     }
 
 
