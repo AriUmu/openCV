@@ -66,7 +66,10 @@ public class BlackWhitePic {
         Core.LUT(img3, lut, imgInv);
         GreyPic.showImage(imgInv, "Adaptive_thresh_mean_c + inv");
         img.release();
+        img2.release();
         img3.release();
+        img4.release();
         imgInv.release();
+        lut.release();
     }
 }
