@@ -15,7 +15,7 @@ public class Gistogramm {
     }
 
     public static void main(String[] args) {
-    showGistogramm("/Users/arina/Desktop/1.jpg");
+        showGistogramm("/Users/arina/Desktop/1.jpg");
     }
 
     public static void showGistogramm(String path) {
@@ -72,16 +72,16 @@ public class Gistogramm {
                         new Point(i, h - 1 - v), CvUtils.COLOR_GREEN);
             }
 
-            v = Math.round(histBlue.get(i,0)[0]);
-            if(v != 0){
-                Imgproc.line(imgHistBlue, new Point(i, h-1),
-                        new Point(i, h-1-v), CvUtils.COLOR_BLUE);
+            v = Math.round(histBlue.get(i, 0)[0]);
+            if (v != 0) {
+                Imgproc.line(imgHistBlue, new Point(i, h - 1),
+                        new Point(i, h - 1 - v), CvUtils.COLOR_BLUE);
             }
 
-            v = Math.round(histGrey.get(i,0)[0]);
-            if(v != 0){
-                Imgproc.line(imgHistGrey, new Point(i, h-1),
-                        new Point(i, h-1-v), CvUtils.COLOR_GREY);
+            v = Math.round(histGrey.get(i, 0)[0]);
+            if (v != 0) {
+                Imgproc.line(imgHistGrey, new Point(i, h - 1),
+                        new Point(i, h - 1 - v), CvUtils.COLOR_GREY);
             }
         }
 
