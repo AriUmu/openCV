@@ -19,30 +19,21 @@ public class BlackWhitePic {
     }
 
     public static void getBlackWhitePic(String path) {
-        Mat img = Imgcodecs.imread(path);
-        if (img.empty()) {
-            System.out.println("Img is empty");
-            return;
-        }
-
+        Mat img = CvUtils.loadPicture(path);
         Mat img2 = new Mat();
         Imgproc.cvtColor(img, img2, Imgproc.COLOR_BGR2GRAY);
         Mat img3 = new Mat();
         double thresh = Imgproc.threshold(img2, img3, 100, 255, Imgproc.THRESH_BINARY | Imgproc.THRESH_OTSU);
         System.out.println(thresh);
 
-        GreyPic.showImage(img3, "THRESH_OTSU");
+        CvUtils.showImage(img3, "THRESH_OTSU");
         img.release();
         img2.release();
         img3.release();
     }
 
     public static void adaptiveThreshold(String path) {
-        Mat img = Imgcodecs.imread(path);
-        if (img.empty()) {
-            System.out.println("Img is empty");
-            return;
-        }
+        Mat img = CvUtils.loadPicture(path);
 
         Mat img2 = new Mat();
         Imgproc.cvtColor(img, img2, Imgproc.COLOR_BGR2GRAY);
@@ -50,8 +41,8 @@ public class BlackWhitePic {
         Imgproc.adaptiveThreshold(img2, img3, 255, Imgproc.ADAPTIVE_THRESH_MEAN_C, Imgproc.THRESH_BINARY, 3, 5);
         Mat img4 = new Mat();
         Imgproc.adaptiveThreshold(img2, img4, 255, Imgproc.ADAPTIVE_THRESH_MEAN_C, Imgproc.THRESH_BINARY, 3, 5);
-        GreyPic.showImage(img3, "Adaptive_thresh_mean_c");
-        GreyPic.showImage(img4, "Adaptive_thresh_gaussian_c + thresh_binary_inv");
+        CvUtils.showImage(img3, "Adaptive_thresh_mean_c");
+        CvUtils.showImage(img4, "Adaptive_thresh_gaussian_c + thresh_binary_inv");
         //инверсия с помощью теблицы соответствия
 
         Mat lut = new Mat(1, 256, CvType.CV_8UC1);
@@ -64,7 +55,7 @@ public class BlackWhitePic {
         //Преобразование в соотвествии с таблицей
         Mat imgInv = new Mat();
         Core.LUT(img3, lut, imgInv);
-        GreyPic.showImage(imgInv, "Adaptive_thresh_mean_c + inv");
+        CvUtils.showImage(imgInv, "Adaptive_thresh_mean_c + inv");
         img.release();
         img2.release();
         img3.release();

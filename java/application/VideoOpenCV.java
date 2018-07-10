@@ -24,7 +24,7 @@ public class VideoOpenCV {
             camera.grab();
             Mat m = new Mat();
             camera.retrieve(m);
-            GreyPic.showImage(m, "Img");
+            CvUtils.showImage(m, "Img");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -53,7 +53,7 @@ public class VideoOpenCV {
         BufferedImage img = null;
         while (capture.read(frame)){
             Imgproc.resize(frame, frame, new Size(960, 540));
-            img =  GreyPic.MapToBufferedImage(frame);
+            img =  CvUtils.MapToBufferedImage(frame);
             if(img != null ){
                 ImageIcon imageIcon = new ImageIcon(img);
                 label.setIcon(imageIcon);
